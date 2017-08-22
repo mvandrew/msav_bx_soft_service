@@ -1,14 +1,16 @@
-var gulp            = require("gulp"),
-    sass            = require("gulp-sass"),
-    cssnano         = require("gulp-cssnano"),
-    autoprefixer    = require("gulp-autoprefixer"),
-    coffee          = require('gulp-coffee'),
-    rename          = require('gulp-rename'),
-    pug             = require('gulp-pug'),
-    pugPHPFilter    = require('pug-php-filter'),
-    plumber         = require('gulp-plumber'),
-    uglify          = require('gulp-uglify'),
-    concat          = require('gulp-concat');
+var gulp                = require("gulp"),
+    sass                = require("gulp-sass"),
+    cssnano             = require("gulp-cssnano"),
+    autoprefixer        = require("gulp-autoprefixer"),
+    coffee              = require('gulp-coffee'),
+    rename              = require('gulp-rename'),
+    pug                 = require('gulp-pug'),
+    pugPHPFilter        = require('pug-php-filter'),
+    plumber             = require('gulp-plumber'),
+    uglify              = require('gulp-uglify'),
+    concat              = require('gulp-concat'),
+    strip               = require('gulp-strip-comments'), // Удаление js комментариев
+    stripCssComments    = require('gulp-strip-css-comments');
 
 gulp.task('fonts', function () {
     return gulp.src( './src/vendor/font-awesome/fonts/**/*.+(otf|eot|svg|ttf|woff|woff2)' )
@@ -17,6 +19,7 @@ gulp.task('fonts', function () {
 
 gulp.task('vendor-css', function () {
     return gulp.src( './src/vendor/font-awesome/css/font-awesome.css' )
+        .pipe( stripCssComments({preserve: false}) )
         .pipe( cssnano() )
         .pipe( concat('vendor-css.min.css') )
         .pipe( gulp.dest('./css/') );
@@ -33,12 +36,12 @@ gulp.task('sass', function () {
 });
 
 gulp.task('coffee', function() {
-    gulp.src('./src/coffee/**/*.coffee')
-        .pipe(coffee({bare: true}))
-        .pipe(gulp.dest('./js/'))
-        .pipe(uglify())
+    gulp.src( './src/coffee/**/*.coffee' )
+        .pipe( coffee({bare: true}) )
+        .pipe( gulp.dest('./js/') )
+        .pipe( uglify() )
         .pipe( rename({suffix: '.min'}) )
-        .pipe(gulp.dest('./js/'));
+        .pipe( gulp.dest('./js/') );
 });
 
 gulp.task('pug', function buildHTML() {
