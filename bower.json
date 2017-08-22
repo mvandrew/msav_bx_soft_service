@@ -1,0 +1,27 @@
+{
+  "name": "msav_bx_soft_service",
+  "description": "Bitrix theme design for the software support company.",
+  "main": "index.js",
+  "authors": [
+    "Andrey Mishchenko"
+  ],
+  "license": "MIT License",
+  "keywords": [
+    "bitrix",
+    "theme",
+    "template"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "susy": "2",
+    "font-awesome": "Font-Awesome#^4.7.0"
+  }
+}
