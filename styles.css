@@ -188,6 +188,36 @@ ul.top_menu {
       ul.top_menu li > a.selected {
         color: #f4c825; }
 
+.breadcrumb {
+  display: block;
+  background-color: #dfd7ca;
+  margin: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 0;
+  padding-right: 0; }
+  .breadcrumb .msav-breadcrumb {
+    clear: both;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+    padding-left: 1.38889%;
+    padding-right: 1.38889%; }
+    .breadcrumb .msav-breadcrumb > .bx-breadcrumb-item {
+      font-size: 0.85em;
+      display: block;
+      float: left;
+      margin-right: 0.4em; }
+      .breadcrumb .msav-breadcrumb > .bx-breadcrumb-item i {
+        color: #98978b; }
+      .breadcrumb .msav-breadcrumb > .bx-breadcrumb-item a {
+        color: #98978b;
+        text-decoration: none; }
+        .breadcrumb .msav-breadcrumb > .bx-breadcrumb-item a:hover, .breadcrumb .msav-breadcrumb > .bx-breadcrumb-item a:focus {
+          color: #c0392b;
+          text-decoration: underline; }
+
 .column_two {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;

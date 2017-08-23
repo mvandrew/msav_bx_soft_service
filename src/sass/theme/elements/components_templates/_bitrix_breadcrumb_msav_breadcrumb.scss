@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+//
+// Хлебные крошки
+//
+.breadcrumb {
+  display: block;
+  background-color: $color_lib_03;
+  margin: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 0;
+  padding-right: 0;
+
+  .msav-breadcrumb {
+    @include full();
+    > .bx-breadcrumb-item {
+      font-size: 0.85em;
+      display: block;
+      float: left;
+      margin-right: 0.4em;
+      i {
+        color: $color_lib_02;
+      }
+      a {
+        color: $color_lib_02;
+        text-decoration: none;
+        &:hover,
+        &:focus {
+          color: $color_lib_08;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+} // .msav-breadcrumb

@@ -69,8 +69,20 @@
         "USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
     ),
     false
-); ?>
+);
+ ?>
 			</nav>
 		</div>
 	</div>
-</header>
+</header><?php if ( !CSite::InDir('/index.php') ): ?>
+<div class="breadcrumb">
+	<div class="container"><?php $APPLICATION->IncludeComponent("bitrix:breadcrumb", "msav_breadcrumb", Array(
+                                "PATH" => "",	// Путь, для которого будет построена навигационная цепочка (по умолчанию, текущий путь)
+                                "SITE_ID" => "s1",	// Cайт (устанавливается в случае многосайтовой версии, когда DOCUMENT_ROOT у сайтов разный)
+                                "START_FROM" => "0",	// Номер пункта, начиная с которого будет построена навигационная цепочка
+                                "COMPONENT_TEMPLATE" => ".default"
+                            ),
+                            false
+                        ); ?>
+	</div>
+</div><?php endif; ?>
