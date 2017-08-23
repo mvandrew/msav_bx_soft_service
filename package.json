@@ -25,11 +25,13 @@
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-pug": "^3.3.0",
+    "gulp-remote-src": "^0.4.3",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-strip-comments": "^2.5.1",
     "gulp-strip-css-comments": "^1.2.0",
     "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.11",
     "imagemin-pngquant": "^5.0.1",
     "pug-php-filter": "0.0.1"

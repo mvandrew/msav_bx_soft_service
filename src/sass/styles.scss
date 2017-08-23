@@ -4,5 +4,27 @@
 // Include libs
 //
 @import "susy_grid";
+$output-bourbon-deprecation-warnings: false;
 @import "../vendor/bourbon/app/assets/stylesheets/bourbon";
 
+// Libs: Библиотеки
+@import "libs/variables";
+@import "libs/mixins";
+
+// Theme Core: Ядро темы
+@import "theme/base/colors";
+@import "theme/base/typography";
+@import "theme/base/layout";
+@import "theme/base/controls";
+
+// Base Page Elements: Стандартные элементы страницы
+@import "theme/elements/header";
+@import "theme/elements/footer";
+@import "theme/elements/components";
+
+// Page Styles: Стили шаблонов страниц
+@import "theme/pages/page";
+@import "theme/pages/page_two_columns";
+@import "theme/pages/frontpage";
+
+// Additional Controls: Стили дополнительных элементов

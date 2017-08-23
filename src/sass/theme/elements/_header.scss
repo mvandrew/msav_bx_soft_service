@@ -1,0 +1,65 @@
+@charset "UTF-8";
+//
+// ЭЛЕМЕНТЫ ШАПКИ САЙТА
+//
+
+header#main_header {
+  display: block;
+  margin: 0;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  padding-right: 0;
+  padding-left: 0;
+  overflow: hidden;
+  background-color: $color_lib_01;
+
+  .header_logo {
+    @include span(first 4);
+    display: flex;
+    align-items: center;
+
+    a.logo_image {
+      display: inline-block;
+      width: 3.125em;
+      margin-right: gutter() * 2;
+      img {
+        width: 100%;
+        border-radius: 50%;
+      }
+    } // a.logo_image
+
+    .phone {
+      font-size: 1.75em;
+      color: $color-bg;
+      span {
+        font-weight: 700;
+      }
+    } // .phone
+  } // .header_logo
+
+  .header_navi {
+    @include span(last 8);
+
+    ul.header_contacts {
+      @include no_list;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      font-size: 0.85em;
+
+      li {
+        display: inline-block;
+        color: $color_lib_07;
+        margin-left: 2em;
+        a {
+          color: $color_lib_07;
+          &:hover,
+          &focus {
+            color: $color_lib_05;
+          }
+        }
+      }
+    } // ul.header_contacts
+  } // .header_navi
+
+} // header#main_header

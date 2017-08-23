@@ -1,0 +1,5 @@
+@charset "UTF-8";
+
+.column_two {
+  @include span(6);
+}

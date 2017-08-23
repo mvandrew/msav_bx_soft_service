@@ -13,7 +13,9 @@ var gulp                = require("gulp"),
     stripCssComments    = require('gulp-strip-css-comments'),
     browserSync         = require('browser-sync'),
     reload              = browserSync.reload,
-    notify              = require('gulp-notify');
+    notify              = require('gulp-notify'),
+    gutil               = require('gulp-util'),
+    remoteSrc           = require('gulp-remote-src');
 
 var workFiles           = [
     './../../../**/*.php',
@@ -45,8 +47,28 @@ gulp.task('fonts', function () {
         .pipe( notify({ message: 'Fonts task complete', onLast: true }) );
 });
 
+gulp.task('google-fonts', function () {
+    return remoteSrc(
+        'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=cyrillic,cyrillic-ext,latin-ext',
+        {
+            base: null
+        }
+    )
+        .pipe( concat('google-fonts.css') )
+        .pipe( gulp.dest('./css/') );
+});
+
 gulp.task('vendor-css', function () {
-    return gulp.src( './src/vendor/font-awesome/css/font-awesome.css' )
+    return gulp.src( [
+        './src/vendor/font-awesome/css/font-awesome.css',
+        './src/vendor/normalize-css/normalize.css'
+    ] )
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
         .pipe( stripCssComments({preserve: false}) )
         .pipe( cssnano() )
         .pipe( concat('vendor-css.min.css') )
@@ -57,7 +79,14 @@ gulp.task('vendor-css', function () {
 
 gulp.task('sass', function () {
     return gulp.src( './src/sass/**/*.scss' )
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
         .pipe( sass() )
+        //.on( 'error', gutil.log )
         .pipe( autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }) )
         .pipe( gulp.dest('./') )
         .pipe( cssnano() )
@@ -69,6 +98,12 @@ gulp.task('sass', function () {
 
 gulp.task('coffee', function() {
     gulp.src( './src/coffee/**/*.coffee' )
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
         .pipe( coffee({bare: true}) )
         .pipe( gulp.dest('./js/') )
         .pipe( uglify() )
@@ -80,7 +115,12 @@ gulp.task('coffee', function() {
 
 gulp.task('pug', function buildHTML() {
     return gulp.src( ['./src/pug/**/*.pug', '!./src/pug/libs/**/*.pug'] )
-        .pipe(plumber())
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
         .pipe( pug({
             pretty: "\t",
             filters: {

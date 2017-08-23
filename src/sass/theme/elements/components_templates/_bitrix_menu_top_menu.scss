@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+//
+// Шаблон главного меню сайта
+//
+
+ul.top_menu {
+  @include no_list;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 0.8em;
+
+  li {
+    display: inline-block;
+    margin-left: 1.5em;
+    text-transform: uppercase;
+    > a {
+      text-decoration: none;
+      color: $color_lib_03;
+      &:hover,
+      &focus {
+        color: $color_lib_05;
+        text-decoration: underline;
+      }
+
+      &.selected {
+        color: $color_lib_05;
+      }
+    }
+  } // li
+
+} // ul.top_menu
