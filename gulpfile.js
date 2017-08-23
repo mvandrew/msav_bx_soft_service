@@ -16,17 +16,17 @@ var gulp                = require("gulp"),
     notify              = require('gulp-notify');
 
 var workFiles           = [
-    '**/*.php',
-    '**/*.css',
-    '**/*.js',
-    '**/*.+(jpeg|jpg|gif|png|svg)',
+    './../../../**/*.php',
+    './../../../**/*.css',
+    './../../../**/*.js',
+    './../../../**/*.+(jpeg|jpg|gif|png|svg)',
 
     // Exclude system and core files
-    '!local/templates/msav_bx_soft_service/src/*',
-    '!local/templates/msav_bx_soft_service/node_modules/*',
-    '!bitrix/*',
-    '!auth/*',
-    '!upload/*'
+    '!./src/*',
+    '!./node_modules/*',
+    '!./../../../bitrix/*',
+    '!./../../../auth/*',
+    '!./../../../upload/*'
 ];
 
 gulp.task('browser-sync', function () {
@@ -99,6 +99,16 @@ gulp.task('watch', ['fonts', 'vendor-css', 'sass', 'pug', 'coffee', 'browser-syn
     gulp.watch('src/sass/**/*.scss', ['sass']);
     gulp.watch('./src/pug/**/*.pug', ['pug']);
     gulp.watch('./src/coffee/**/*.coffee', ['coffee']);
+
+    var contentFiles = [
+        '**/*.php',
+        // Exclude system and core files
+        '!local/*',
+        '!bitrix/*',
+        '!auth/*',
+        '!upload/*'
+    ];
+    //gulp.watch(contentFiles, [reload({stream:true})]);
 });
 
 gulp.task("default", ["watch"]);
