@@ -22,6 +22,7 @@
   ],
   "dependencies": {
     "susy": "2",
-    "font-awesome": "Font-Awesome#^4.7.0"
+    "font-awesome": "Font-Awesome#^4.7.0",
+    "bourbon": "4"
   }
 }

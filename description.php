@@ -1,8 +1,10 @@
-<?
-$arTemplate = array (
-  'NAME' => 'Обслуживание Программ 1С',
-  'DESCRIPTION' => 'Тема оформления для сайта по обслуживанию программного обеспечения 1С',
-  'SORT' => '',
-  'TYPE' => '',
+<?php
+\Bitrix\Main\Localization\Loc::loadLanguageFile(__FILE__);
+
+$arTemplate         = array (
+  'NAME'            => GetMessage('T_SOFT_SERVICE_DESC_NAME'),
+  'DESCRIPTION'     => GetMessage('T_SOFT_SERVICE_DESC_DESC'),
+  'SORT'            => '',
+  'TYPE'            => '',
 );
 ?>
