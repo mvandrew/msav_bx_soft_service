@@ -6,12 +6,15 @@ head
     link(rel="shortcut icon" href="/favicon.ico")
     link(href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet")
     meta(name="yandex-verification" content="58b41ef854fc984a")
+    meta(name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0")
     title
         :php
             $APPLICATION->ShowTitle(false);
     :php
         $APPLICATION->ShowHead();
         \Bitrix\Main\Page\Asset::getInstance()->addCss( SITE_TEMPLATE_PATH . '/css/vendor-css.min.css' );
+        \Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/vendor-js.min.js');
+        \Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/script.min.js');
 :php
     echo '<body class="'
         .(CSite::InDir('/index.php') ? 'frontpage ' : '')
@@ -38,6 +41,16 @@ div#main_header
 
         div.header_navi
             ul.header_contacts
+                li.phone
+                    :php
+                        $APPLICATION->IncludeComponent(
+                                        "msav:msav.contact.item",
+                                        "",
+                                        array(
+                                            "CONTACT_ITEM" => "phone",
+                                            "SHOW_ICON" => "Y"
+                                        )
+                                );
                 li.email
                     :php
                         $APPLICATION->IncludeComponent(
@@ -69,6 +82,10 @@ div#main_header
                                         )
                                 );
             nav.main_menu
+                div.toggle_button
+                    div.toggle_line.toggle_line_top
+                    div.toggle_line.toggle_line_middle
+                    div.toggle_line.toggle_line_bottom
                 :php
                     $APPLICATION->IncludeComponent("bitrix:menu", "top_menu", Array(
                         "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно

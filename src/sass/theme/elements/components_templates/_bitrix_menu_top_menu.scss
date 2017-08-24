@@ -4,30 +4,108 @@
 // Шаблон главного меню сайта
 //
 
-ul.top_menu {
-  @include no_list;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-top: 0.8em;
+.main_menu {
+  display: block;
+  overflow: hidden;
 
-  li {
-    display: inline-block;
-    margin-left: 1.5em;
-    text-transform: uppercase;
-    > a {
-      text-decoration: none;
-      color: $color_lib_03;
-      &:hover,
-      &focus {
-        color: $color_lib_05;
-        text-decoration: underline;
+  .toggle_button {
+    display: none;
+    @media screen and (max-width: $screen-sm) {
+      position: relative;
+      display: block;
+      width: 49px;
+      height: 49px;
+      border-color: $color_lib_07;
+      border-width: 3px;
+      border-style: solid;
+      margin: 0 auto;
+      cursor: pointer;
+      .toggle_line {
+        position: absolute;
+        left: 10%;
+        width: 80%;
+        height: 3px;
+        background-color: $color_lib_07;
+        display: block;
+        transition: 1s;
       }
-
-      &.selected {
-        color: $color_lib_05;
+      .toggle_line_top {
+        top: 10px;
+      }
+      .toggle_line_middle {
+        top: 23px;
+      }
+      .toggle_line_bottom {
+        top: 36px;
+      }
+      &.active {
+        .toggle_line_top {
+          transform: rotate(45deg);
+          top: 50%;
+        }
+        .toggle_line_middle {
+          opacity: 0;
+        }
+        .toggle_line_bottom {
+          transform: rotate(-45deg);
+          top: 50%;
+        }
       }
     }
-  } // li
+  }
 
-} // ul.top_menu
+  ul.top_menu {
+    @include no_list;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 0.8em;
+    @media screen and (max-width: $screen-lg) {
+      margin-top: 1.1em;
+    }
+    @media screen and (max-width: $screen-md) {
+      margin-top: 0.8em;
+    }
+
+    li {
+      display: inline-block;
+      margin-left: 1.5em;
+      text-transform: uppercase;
+      @media screen and (max-width: $screen-lg) {
+        margin-left: 1.1em;
+        font-size: 0.85em;
+      }
+      @media screen and (max-width: $screen-md) {
+        font-size: 1em;
+      }
+      > a {
+        text-decoration: none;
+        color: $color_lib_03;
+        &:hover,
+        &focus {
+          color: $color_lib_05;
+          text-decoration: underline;
+        }
+
+        &.selected {
+          color: $color_lib_05;
+        }
+      }
+    } // li
+
+    @media screen and (max-width: $screen-sm) {
+      display: none;
+      li {
+        display: block;
+        margin-left: 0;
+        text-align: center;
+        font-size: 1.4em;
+        font-weight: 300;
+        margin-top: $margin-small;
+        margin-bottom: $margin-small;
+      }
+    }
+
+  } // ul.top_menu
+
+} // .main_menu

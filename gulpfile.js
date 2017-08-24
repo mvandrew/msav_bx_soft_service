@@ -9,7 +9,7 @@ var gulp                = require("gulp"),
     plumber             = require('gulp-plumber'),
     uglify              = require('gulp-uglify'),
     concat              = require('gulp-concat'),
-    strip               = require('gulp-strip-comments'), // Удаление js комментариев
+    stripComments       = require('gulp-strip-comments'), // Удаление js комментариев
     stripCssComments    = require('gulp-strip-css-comments'),
     browserSync         = require('browser-sync'),
     reload              = browserSync.reload,
@@ -73,8 +73,24 @@ gulp.task('vendor-css', function () {
         .pipe( cssnano() )
         .pipe( concat('vendor-css.min.css') )
         .pipe( gulp.dest('./css/') )
-        .pipe( reload({stream:true}) )
         .pipe( notify({ message: 'Vendor styles task complete', onLast: true }) );
+});
+
+gulp.task('vendor-js', function () {
+    return gulp.src([
+        './src/vendor/jquery/dist/jquery.min.js'
+    ])
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
+        .pipe( stripComments() )
+        .pipe( concat('vendor-js.min.js') )
+        .pipe( uglify() )
+        .pipe( gulp.dest('./js/') )
+        .pipe( notify({ message: 'Vendor Javascripts task complete', onLast: true }) );
 });
 
 gulp.task('sass', function () {
@@ -135,7 +151,7 @@ gulp.task('pug', function buildHTML() {
         .pipe( notify({ message: 'Pug(Jade) task complete', onLast: true }) );
 });
 
-gulp.task('watch', ['fonts', 'vendor-css', 'sass', 'pug', 'coffee', 'browser-sync'], function () {
+gulp.task('watch', ['fonts', 'vendor-css', 'vendor-js', 'sass', 'pug', 'coffee', 'browser-sync'], function () {
     gulp.watch('src/sass/**/*.scss', ['sass']);
     gulp.watch('./src/pug/**/*.pug', ['pug']);
     gulp.watch('./src/coffee/**/*.coffee', ['coffee']);

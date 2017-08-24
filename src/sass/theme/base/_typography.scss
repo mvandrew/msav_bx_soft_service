@@ -269,16 +269,19 @@ $form-text-size: 1.125em;
         &:after {
           content: ':';
         }
-        &.req:before {
-          display: inline-block;
-          font: normal normal normal 14px/1 FontAwesome;
-          font-size: inherit;
-          text-rendering: auto;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-          content: "\f005";
-          color: $color_lib_08;
-          margin-right: $margin-small / 2;
+        &.req {
+          font-weight: 600;
+          &:before {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            content: "\f005";
+            color: $color_lib_08;
+            margin-right: $margin-small / 2;
+          }
         }
       } // label
     } // .field_label

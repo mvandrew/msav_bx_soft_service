@@ -3,8 +3,11 @@
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
 	<meta name="yandex-verification" content="58b41ef854fc984a">
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
 	<title><?php $APPLICATION->ShowTitle(false); ?></title><?php $APPLICATION->ShowHead();
-\Bitrix\Main\Page\Asset::getInstance()->addCss( SITE_TEMPLATE_PATH . '/css/vendor-css.min.css' ); ?>
+\Bitrix\Main\Page\Asset::getInstance()->addCss( SITE_TEMPLATE_PATH . '/css/vendor-css.min.css' );
+\Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/vendor-js.min.js');
+\Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/script.min.js'); ?>
 </head><?php echo '<body class="'
     .(CSite::InDir('/index.php') ? 'frontpage ' : '')
     .'">'; ?><a id="top"></a>
@@ -25,6 +28,15 @@
 		</div>
 		<div class="header_navi">
 			<ul class="header_contacts">
+				<li class="phone"><?php $APPLICATION->IncludeComponent(
+                "msav:msav.contact.item",
+                "",
+                array(
+                    "CONTACT_ITEM" => "phone",
+                    "SHOW_ICON" => "Y"
+                )
+        ); ?>
+				</li>
 				<li class="email"><?php $APPLICATION->IncludeComponent(
                 "msav:msav.contact.item",
                 "",
@@ -53,7 +65,12 @@
         ); ?>
 				</li>
 			</ul>
-			<nav class="main_menu"><?php $APPLICATION->IncludeComponent("bitrix:menu", "top_menu", Array(
+			<nav class="main_menu">
+				<div class="toggle_button">
+					<div class="toggle_line toggle_line_top"></div>
+					<div class="toggle_line toggle_line_middle"></div>
+					<div class="toggle_line toggle_line_bottom"></div>
+				</div><?php $APPLICATION->IncludeComponent("bitrix:menu", "top_menu", Array(
     "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
         "CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
         "DELAY" => "N",	// Откладывать выполнение шаблона меню
