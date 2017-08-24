@@ -1,18 +1,17 @@
 <?php if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?><!DOCTYPE html><html lang="ru">
 <head>
-	<meta name="yandex-verification" content="58b41ef854fc984a">
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
-	<meta charset="utf-8">
-	<title><?php $APPLICATION->ShowTitle(); ?></title><?php $APPLICATION->ShowHead();
+	<meta name="yandex-verification" content="58b41ef854fc984a">
+	<title><?php $APPLICATION->ShowTitle(false); ?></title><?php $APPLICATION->ShowHead();
 \Bitrix\Main\Page\Asset::getInstance()->addCss( SITE_TEMPLATE_PATH . '/css/vendor-css.min.css' ); ?>
 </head><?php echo '<body class="'
     .(CSite::InDir('/index.php') ? 'frontpage ' : '')
     .'">'; ?><a id="top"></a>
 <div class="panel"><?php $APPLICATION->ShowPanel(); ?></div>
-<header id="main_header">
+<div id="main_header">
 	<div class="container">
-		<div class="header_logo"><a class="logo_image" href="/"><img src="<?php echo SITE_TEMPLATE_PATH; ?>/img/header-logo.jpg"></a>
+		<div class="header_logo"><a class="logo_image" href="/"><img src="<?php echo SITE_TEMPLATE_PATH; ?>/img/header-logo.jpg" alt=""></a>
 			<div class="phone"><?php $APPLICATION->IncludeComponent(
                 "msav:msav.contact.item",
                 "",
@@ -74,7 +73,7 @@
 			</nav>
 		</div>
 	</div>
-</header><?php if ( !CSite::InDir('/index.php') ): ?>
+</div><?php if ( !CSite::InDir('/index.php') ): ?>
 <div class="breadcrumb">
 	<div class="container"><?php $APPLICATION->IncludeComponent("bitrix:breadcrumb", "msav_breadcrumb", Array(
                                 "PATH" => "",	// Путь, для которого будет построена навигационная цепочка (по умолчанию, текущий путь)
@@ -85,4 +84,17 @@
                             false
                         ); ?>
 	</div>
-</div><?php endif; ?>
+</div>
+<header id="title_area">
+	<div class="container">
+		<h1><?php $APPLICATION->ShowTitle(false); ?></h1>
+	</div>
+</header><?php endif;
+
+if (defined("_MSAV_TH_TWO_COLUMNS")) {
+    // Для двухколоночного макета
+    echo '<div class="container"><main class="two_columns_container">';
+} else {
+    // По-умолчанию, с правым сайдбаром
+    echo '<div class="container"><main class="right_sidebar_container">';
+} ?>

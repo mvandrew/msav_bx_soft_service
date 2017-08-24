@@ -33,3 +33,20 @@ $color-link:                  $color_lib_06;              // Цвет ссыло
 $color-link-active:           #2a689e;                    // Цвет ссылок текущей страницы
 $color-link-hover:            $color_lib_08;              // Цвет ссылки при наведении
 $link-hover-decoration:       underline !default;         // Подчёркивание ссылки при наведении
+
+
+//
+// Цвет заголовка
+//
+$color-header-bg:             #f2ede4 !default;           // Цвет фона панели заголовка
+
+
+
+//
+// Цвета таблицы
+//
+$color-table-top-border:      $color_lib_05;              // Цвет верхней границы перед таблицей
+$color-table-row-border:      $color_lib_02;              // Цвен нижней границы строки
+$color-table-header-bg:       #f2ede4 !default;;          // Цвет фона шапки
+$color-table-row-bg-odd:      $color_lib_04;              // Фон строки
+$color-table-row-bg-even:     $color-bg;                  // Фон чётной строки

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+//
+// Стиль страницы с правым сайдбаром
+//
+
+main.right_sidebar_container,
+aside.right_sidebar {
+  > *:first-child {
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
+main.right_sidebar_container {
+  @include span(first 9);
+} // main.right_sidebar_container
+
+
+aside.right_sidebar {
+  @include span(last 3);
+  margin-top: $margin-base * 2;
+  margin-bottom: $margin-base;
+  padding-top: 0;
+  padding-bottom: 0;
+} // aside.right_sidebar

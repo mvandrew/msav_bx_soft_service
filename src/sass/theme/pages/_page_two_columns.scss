@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+//
+// Стиль страницы с двумя колонками
+//
+
 .column_two {
   @include span(6);
+  > *:first-child {
+    padding-top: 0;
+    margin-top: 0;
+  }
 }

@@ -44,7 +44,7 @@ for($index = 0; $index < $itemSize; $index++)
 		$strReturn .= '
 			<div class="bx-breadcrumb-item">
 				'.$arrow.'
-				<span>'.$title.'</span>
+				<span>'.$display_title.'</span>
 			</div>';
 	}
 }

@@ -25,6 +25,7 @@ $output-bourbon-deprecation-warnings: false;
 // Page Styles: Стили шаблонов страниц
 @import "theme/pages/page";
 @import "theme/pages/page_two_columns";
+@import "theme/pages/page_right_sidebar";
 @import "theme/pages/frontpage";
 
 // Additional Controls: Стили дополнительных элементов
