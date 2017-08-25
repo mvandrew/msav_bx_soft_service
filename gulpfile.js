@@ -22,7 +22,8 @@ var gulp                = require("gulp"),
     spritesmith         = require('gulp.spritesmith'),
     buffer              = require('vinyl-buffer'),
     merge               = require('merge-stream'),
-    imageResize         = require('gulp-image-resize');
+    imageResize         = require('gulp-image-resize'),
+    gcmq                = require('gulp-group-css-media-queries');
 
 var workFiles           = [
     './../../../**/*.php',
@@ -93,7 +94,8 @@ gulp.task('vendor-css', function () {
 gulp.task('vendor-js', function () {
     return gulp.src([
         './src/vendor/jquery/dist/jquery.min.js',
-        './src/vendor/device.js/lib/device.min.js'
+        './src/vendor/device.js/lib/device.min.js',
+        './src/vendor/matchHeight/dist/jquery.matchHeight-min.js'
     ])
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
@@ -119,6 +121,7 @@ gulp.task('sass', function () {
         .pipe( sass() )
         //.on( 'error', gutil.log )
         .pipe( autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }) )
+        .pipe( gcmq() )
         .pipe( gulp.dest('./') )
         .pipe( cssnano() )
         .pipe( rename({suffix: '.min'}) )
@@ -137,6 +140,7 @@ gulp.task('assets-sass', function () {
         }}) )
         .pipe( sass() )
         .pipe( autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }) )
+        .pipe( gcmq() )
         .pipe( gulp.dest('./../../../assets/css/') )
         .pipe( cssnano() )
         .pipe( rename({suffix: '.min'}) )
@@ -158,6 +162,23 @@ gulp.task('coffee', function() {
         .pipe( uglify() )
         .pipe( rename({suffix: '.min'}) )
         .pipe( gulp.dest('./js/') )
+        .pipe( reload({stream:true}) )
+        .pipe( notify({ message: 'Javascript task complete', onLast: true }) );
+});
+
+gulp.task('assets-coffee', function() {
+    gulp.src( './../../../assets/src/coffee/**/*.coffee' )
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
+        .pipe( coffee({bare: true}) )
+        .pipe( gulp.dest('./../../../assets/js/') )
+        .pipe( uglify() )
+        .pipe( rename({suffix: '.min'}) )
+        .pipe( gulp.dest('./../../../assets/js/') )
         .pipe( reload({stream:true}) )
         .pipe( notify({ message: 'Javascript task complete', onLast: true }) );
 });
@@ -272,13 +293,14 @@ gulp.task('clear', function (done) {
 });
 
 gulp.task('watch', [ 'fonts', 'vendor-css', 'vendor-js', 'sass', 'pug', 'coffee', 'img',
-        'assets-sass', 'assets-img', 'browser-sync' ], function () {
+        'assets-sass', 'assets-coffee', 'assets-img', 'browser-sync' ], function () {
 
     gulp.watch('./src/sass/**/*.scss', ['sass']);
     gulp.watch('./src/pug/**/*.pug', ['pug']);
     gulp.watch('./src/coffee/**/*.coffee', ['coffee']);
 
     gulp.watch('./../../../assets/src/sass/**/*.scss', ['assets-sass']);
+    gulp.watch('./../../../assets/src/coffee/**/*.coffee', ['assets-coffee']);
 });
 
 gulp.task("default", ["watch"]);

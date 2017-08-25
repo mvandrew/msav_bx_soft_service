@@ -30,8 +30,6 @@
         @.appendChild phoneLink
         $(phoneLink).text phoneNum
 
-        console.log phoneNum
-
 
   $(document).ready ->
     anchorAnimate()

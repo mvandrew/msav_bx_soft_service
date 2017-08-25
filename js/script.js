@@ -32,8 +32,7 @@
         phoneLink = document.createElement("a");
         phoneLink.setAttribute("href", "tel:" + phoneNum);
         this.appendChild(phoneLink);
-        $(phoneLink).text(phoneNum);
-        return console.log(phoneNum);
+        return $(phoneLink).text(phoneNum);
       });
     }
   };

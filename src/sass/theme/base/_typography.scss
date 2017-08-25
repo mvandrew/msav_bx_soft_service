@@ -351,3 +351,9 @@ a {
     text-decoration: $link-hover-decoration;
   }
 }
+
+a.more_button:after {
+  @include fa-block;
+  content: "\f101";
+  margin-left: $margin-small / 2;
+}
