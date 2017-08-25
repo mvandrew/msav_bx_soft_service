@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
 	<title><?php $APPLICATION->ShowTitle(false); ?></title><?php $APPLICATION->ShowHead();
 \Bitrix\Main\Page\Asset::getInstance()->addCss( SITE_TEMPLATE_PATH . '/css/vendor-css.min.css' );
-\Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/vendor-js.min.js');
-\Bitrix\Main\Page\Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/script.min.js'); ?>
+\Bitrix\Main\Page\Asset::getInstance()->addJs( SITE_TEMPLATE_PATH . '/js/vendor-js.min.js' );
+\Bitrix\Main\Page\Asset::getInstance()->addJs( SITE_TEMPLATE_PATH . '/js/script.min.js' ); ?>
 </head><?php echo '<body class="'
     .(CSite::InDir('/index.php') ? 'frontpage ' : '')
     .'">'; ?><a id="top"></a>
@@ -111,6 +111,9 @@
 if (defined("_MSAV_TH_TWO_COLUMNS")) {
     // Для двухколоночного макета
     echo '<div class="container"><main class="two_columns_container">';
+} elseif (defined("_MSAV_TH_NO_CONTAINER")) {
+        // Для двухколоночного макета
+        echo '<main class="no_container">';
 } else {
     // По-умолчанию, с правым сайдбаром
     echo '<div class="container"><main class="right_sidebar_container">';

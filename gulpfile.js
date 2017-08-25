@@ -15,20 +15,28 @@ var gulp                = require("gulp"),
     reload              = browserSync.reload,
     notify              = require('gulp-notify'),
     gutil               = require('gulp-util'),
-    remoteSrc           = require('gulp-remote-src');
+    remoteSrc           = require('gulp-remote-src'),
+    imagemin            = require('gulp-imagemin'),
+    imageminPngquant    = require('imagemin-pngquant'),
+    cache               = require('gulp-cache'),
+    spritesmith         = require('gulp.spritesmith'),
+    buffer              = require('vinyl-buffer'),
+    merge               = require('merge-stream'),
+    imageResize         = require('gulp-image-resize');
 
 var workFiles           = [
     './../../../**/*.php',
-    './../../../**/*.css',
-    './../../../**/*.js',
+    './**/*.css',
+    './../../../assets/css/*.css',
+    './js/**/*.js',
     './../../../**/*.+(jpeg|jpg|gif|png|svg)',
 
     // Exclude system and core files
-    '!./src/*',
-    '!./node_modules/*',
-    '!./../../../bitrix/*',
-    '!./../../../auth/*',
-    '!./../../../upload/*'
+    '!./src/**/*',
+    '!./node_modules/**/*',
+    '!./../../../bitrix/**/*',
+    '!./../../../auth/**/*',
+    '!./../../../upload/**/*'
 ];
 
 gulp.task('browser-sync', function () {
@@ -42,6 +50,12 @@ gulp.task('browser-sync', function () {
 
 gulp.task('fonts', function () {
     return gulp.src( './src/vendor/font-awesome/fonts/**/*.+(otf|eot|svg|ttf|woff|woff2)' )
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
         .pipe( gulp.dest('./fonts/') )
         .pipe( reload({stream:true}) )
         .pipe( notify({ message: 'Fonts task complete', onLast: true }) );
@@ -113,6 +127,24 @@ gulp.task('sass', function () {
         .pipe( notify({ message: 'Styles task complete', onLast: true }) );
 });
 
+gulp.task('assets-sass', function () {
+    return gulp.src( './../../../assets/src/sass/**/*.scss' )
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
+        .pipe( sass() )
+        .pipe( autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }) )
+        .pipe( gulp.dest('./../../../assets/css/') )
+        .pipe( cssnano() )
+        .pipe( rename({suffix: '.min'}) )
+        .pipe( gulp.dest('./../../../assets/css/') )
+        .pipe( reload({stream:true}) )
+        .pipe( notify({ message: 'Assets Styles task complete', onLast: true }) );
+});
+
 gulp.task('coffee', function() {
     gulp.src( './src/coffee/**/*.coffee' )
         .pipe( plumber({ errorHandler: function(err) {
@@ -152,20 +184,101 @@ gulp.task('pug', function buildHTML() {
         .pipe( notify({ message: 'Pug(Jade) task complete', onLast: true }) );
 });
 
-gulp.task('watch', ['fonts', 'vendor-css', 'vendor-js', 'sass', 'pug', 'coffee', 'browser-sync'], function () {
-    gulp.watch('src/sass/**/*.scss', ['sass']);
+gulp.task('img', function() {
+    return gulp.src('./src/img/**/*')
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
+        .pipe( cache(imagemin({
+                interlaced: true,
+                progressive: true,
+                svgoPlugins: [{removeViewBox: false}],
+                use: [imageminPngquant()]
+            }))
+        )
+        .pipe( gulp.dest('./img/') )
+        .pipe( notify({ message: 'Theme Images task complete', onLast: true }) );
+});
+
+gulp.task('assets-img', function() {
+    return gulp.src('./../../../assets/src/img/**/*')
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
+        .pipe( cache(imagemin({
+                interlaced: true,
+                progressive: true,
+                svgoPlugins: [{removeViewBox: false}],
+                use: [imageminPngquant()]
+            }))
+        )
+        .pipe( gulp.dest('./../../../assets/img/') )
+        .pipe( notify({ message: 'Assets Images task complete', onLast: true }) );
+});
+
+gulp.task('icons-sprite', function () {
+
+    var spriteData = gulp.src('./../../../assets/src/resource/icons/*.png')
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
+        .pipe(imageResize({
+            width: 64,
+            height: 64,
+            crop: true,
+            upscale: true,
+            imageMagick: true
+        }))
+        .pipe(spritesmith({
+            imgName: 'icons.png',
+            cssName: '_icons.scss',
+            cssFormat: 'scss',
+            algorithm: 'binary-tree',
+            cssVarMap: function(sprite) {
+                sprite.name = 'ico-' + sprite.name
+            }
+        })
+        );
+
+    var imgStream = spriteData.img
+        .pipe( buffer() )
+        .pipe( cache(imagemin({
+                interlaced: true,
+                progressive: true,
+                svgoPlugins: [{removeViewBox: false}],
+                use: [imageminPngquant()]
+            }))
+        )
+        .pipe( gulp.dest('./../../../assets/img/') );
+
+    var cssStream = spriteData.css
+        .pipe( gulp.dest('./../../../assets/src/sass/') );
+
+    return merge(imgStream, cssStream)
+        .pipe( notify({ message: 'Icons 64px Sprite task complete', onLast: true }) );
+});
+
+gulp.task('clear', function (done) {
+    return cache.clearAll(done);
+});
+
+gulp.task('watch', [ 'fonts', 'vendor-css', 'vendor-js', 'sass', 'pug', 'coffee', 'img',
+        'assets-sass', 'assets-img', 'browser-sync' ], function () {
+
+    gulp.watch('./src/sass/**/*.scss', ['sass']);
     gulp.watch('./src/pug/**/*.pug', ['pug']);
     gulp.watch('./src/coffee/**/*.coffee', ['coffee']);
 
-    var contentFiles = [
-        '**/*.php',
-        // Exclude system and core files
-        '!local/*',
-        '!bitrix/*',
-        '!auth/*',
-        '!upload/*'
-    ];
-    //gulp.watch(contentFiles, [reload({stream:true})]);
+    gulp.watch('./../../../assets/src/sass/**/*.scss', ['assets-sass']);
 });
 
 gulp.task("default", ["watch"]);
