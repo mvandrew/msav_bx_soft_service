@@ -25,6 +25,7 @@
     "font-awesome": "Font-Awesome#^4.7.0",
     "bourbon": "4",
     "normalize-css": "^7.0.0",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "device.js": "devices#^0.0.2"
   }
 }

@@ -20,6 +20,12 @@
     @media screen and (max-width: $screen-md) {
       display: none;
     }
+    @media screen and (max-width: $screen-sm) {
+      @include full();
+      display: flex;
+      justify-content: center;
+      margin-bottom: $margin-small;
+    }
 
     a.logo_image {
       display: inline-block;
@@ -36,6 +42,15 @@
       color: $color-bg;
       span {
         font-weight: 600;
+        a {
+          color: $color-bg;
+          text-decoration: none;
+          &:hover,
+          &:focus {
+            color: $color-bg;
+            text-decoration: none;
+          }
+        }
       }
       @media screen and (max-width: $screen-lg) {
         font-size: 1.4em;
@@ -55,6 +70,9 @@
       flex-direction: row;
       justify-content: flex-end;
       font-size: 0.85em;
+      @media screen and (max-width: $screen-sm) {
+        display: none;
+      }
 
       li {
         display: inline-block;

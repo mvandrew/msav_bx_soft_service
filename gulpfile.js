@@ -78,7 +78,8 @@ gulp.task('vendor-css', function () {
 
 gulp.task('vendor-js', function () {
     return gulp.src([
-        './src/vendor/jquery/dist/jquery.min.js'
+        './src/vendor/jquery/dist/jquery.min.js',
+        './src/vendor/device.js/lib/device.min.js'
     ])
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({

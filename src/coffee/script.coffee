@@ -18,8 +18,24 @@
         topMenu.slideDown()
 
 
+  phoneContactModify = () -> # Реализация кликабельной ссылки на телефоне для смартфонов
+    if device.mobile()
+      $(".contact_phone").each ->
+        phoneNum = $(@).text() # Текущее значение номера телефона
+        $(@).text ""
+
+        # Создание ссылки для звонка со смартфона
+        phoneLink = document.createElement "a"
+        phoneLink.setAttribute "href", "tel:" + phoneNum
+        @.appendChild phoneLink
+        $(phoneLink).text phoneNum
+
+        console.log phoneNum
+
+
   $(document).ready ->
     anchorAnimate()
     topMenuPrepare()
+    phoneContactModify()
 
 ) jQuery
