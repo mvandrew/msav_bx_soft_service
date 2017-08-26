@@ -26,4 +26,10 @@
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 300;
+  @media screen and (max-width: $screen-sm) {
+    font-size: 3em;
+  }
+  @media screen and (max-width: $screen-xs) {
+    font-size: 2.2em;
+  }
 }
