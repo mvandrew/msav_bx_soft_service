@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+//
+// Блок преимуществ
+//
+.advantages_area {
+  background-color: #fdf2d8;
+  display: block;
+  overflow: hidden;
+
+  h2 {
+    @include fill-width-title;
+  }
+
+  .advantage_item {
+    display: block;
+    overflow: hidden;
+    @include span(6);
+    padding: $margin-small;
+    @media screen and (max-width: $screen-sm) {
+      @include full();
+    }
+
+    h3 {
+      display: inline-block;
+      max-width: 100%;
+      background-color: $color_lib_06;
+      color: $color-bg;
+      text-transform: uppercase;
+      padding-left: $margin-small;
+      padding-right: $margin-small;
+      margin-top: 0;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      @media screen and (max-width: $screen-lg) {
+        font-size: 2em;
+      }
+    }
+
+    p {
+      display: block;
+      font-size: 1.675em;
+      font-weight: 300;
+      margin-top: 0;
+      margin-left: 2.6em;
+      @media screen and (max-width: $screen-md) {
+        font-size: 1.375em;
+        margin-left: 1.8em;
+      }
+    }
+  }
+
+} // .advantages_area

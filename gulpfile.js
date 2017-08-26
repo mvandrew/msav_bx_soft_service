@@ -26,6 +26,7 @@ var gulp                = require("gulp"),
     gcmq                = require('gulp-group-css-media-queries');
 
 var workFiles           = [
+    './**/*.php',
     './../../../**/*.php',
     './**/*.css',
     './../../../assets/css/*.css',

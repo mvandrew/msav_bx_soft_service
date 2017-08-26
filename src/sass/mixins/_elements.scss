@@ -3,6 +3,8 @@
 //
 // Части элементов оформления
 //
+
+// Стиль блока для размещения икноки Font Awesome
 @mixin fa-block {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
@@ -10,4 +12,18 @@
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+// Стили заголовков блоков для посадочных страниц
+@mixin fill-width-title {
+  @include full();
+  display: block;
+  text-align: center;
+  font-size: 3.75em;
+  margin-top: $margin-small;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 300;
 }
