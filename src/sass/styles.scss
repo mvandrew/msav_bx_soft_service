@@ -7,12 +7,13 @@
 $output-bourbon-deprecation-warnings: false;
 @import "../vendor/bourbon/app/assets/stylesheets/bourbon";
 
+@import "theme/base/colors";
+
 // Libs: Библиотеки
 @import "libs/variables";
 @import "libs/mixins";
 
 // Theme Core: Ядро темы
-@import "theme/base/colors";
 @import "theme/base/typography";
 @import "theme/base/layout";
 @import "theme/base/controls";

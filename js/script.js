@@ -1,5 +1,5 @@
 (function($) {
-  var anchorAnimate, phoneContactModify, topMenuPrepare;
+  var anchorAnimate, phoneContactModify, servicesListMatchHeight, topMenuPrepare;
   anchorAnimate = function() {
     return $("a[href*='#']").on("click", function(event) {
       var hrefValue, pattern;
@@ -36,9 +36,14 @@
       });
     }
   };
+  servicesListMatchHeight = function() {
+    $(".services-list-title").matchHeight();
+    return $(".services-list-descr").matchHeight();
+  };
   return $(document).ready(function() {
     anchorAnimate();
     topMenuPrepare();
-    return phoneContactModify();
+    phoneContactModify();
+    return servicesListMatchHeight();
   });
 })(jQuery);

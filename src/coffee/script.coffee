@@ -31,9 +31,15 @@
         $(phoneLink).text phoneNum
 
 
+  servicesListMatchHeight = () -> # Контроль высоты блоков списка услуг
+    $(".services-list-title").matchHeight()
+    $(".services-list-descr").matchHeight()
+
+
   $(document).ready ->
     anchorAnimate()
     topMenuPrepare()
     phoneContactModify()
+    servicesListMatchHeight()
 
 ) jQuery

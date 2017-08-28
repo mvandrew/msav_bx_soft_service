@@ -1,3 +1,44 @@
+a.more-button.more-button-big {
+  font-size: 1.375em;
+  display: inline-block;
+  background-color: transparent;
+  color: #3f3e3a;
+  border-color: #3f3e3a;
+  border-width: 2px;
+  border-style: solid;
+  padding-top: 0.4em !important;
+  padding-bottom: 0.8em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+}
+
+a.more-button.more-button-big:hover,
+a.more-button.more-button-big:focus {
+  background-color: #f4c825;
+}
+
+a.more-button.more-button-big.more-button-light {
+  color: #eedb93;
+  border-color: #eedb93;
+}
+
+a.more-button.more-button-big.more-button-light:hover,
+a.more-button.more-button-big.more-button-light:focus {
+  color: #3f3e3a;
+  background-color: #eedb93;
+}
+
+a.more-button:after {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f101";
+  margin-left: 0.4em;
+}
+
 body,
 button,
 input,
@@ -354,17 +395,6 @@ a:hover,
 a:focus {
   color: #c0392b;
   text-decoration: underline;
-}
-
-a.more_button:after {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  content: "\f101";
-  margin-left: 0.4em;
 }
 
 .container {
@@ -746,6 +776,79 @@ header#title_area h1 {
   font-weight: 300;
   margin-top: 0;
   margin-left: 2.6em;
+}
+
+ul.services-list {
+  list-style: none;
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+ul.services-list li {
+  display: block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 25%;
+  float: left;
+  padding-left: 1.38889%;
+  padding-right: 1.38889%;
+}
+
+ul.services-list li .services-list-container {
+  display: block;
+  border-style: solid;
+  border-width: 2px;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+  background-color: #ffffff;
+}
+
+ul.services-list li .services-list-container h3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+  padding: 0.8em;
+  color: #ffffff;
+  font-size: 1.5em;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+ul.services-list li .services-list-container h3 a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+ul.services-list li .services-list-container h3 a:hover,
+ul.services-list li .services-list-container h3 a:focus {
+  text-decoration: underline;
+  color: #f7f3eb;
+}
+
+ul.services-list li .services-list-container p {
+  margin-left: 0.8em;
+  margin-right: 0.8em;
+}
+
+ul.services-list li .services-list-container p.more-area {
+  margin-bottom: 0.8em;
+  text-align: right;
 }
 
 .column_two {
