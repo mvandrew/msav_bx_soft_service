@@ -12,3 +12,7 @@ html, body {
 .full_row {
   @include full();
 }
+
+.clearfix {
+  @include susy-clearfix;
+}

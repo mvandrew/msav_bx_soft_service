@@ -12,6 +12,15 @@ ul.services-list {
   li {
     display: block;
     @include span(3);
+    @media screen and (max-width: $screen-lg) {
+      @include span(4);
+    }
+    @media screen and (max-width: $screen-md) {
+      @include span(6);
+    }
+    @media screen and (max-width: $screen-sm) {
+      @include full();
+    }
 
     .services-list-container {
       display: block;

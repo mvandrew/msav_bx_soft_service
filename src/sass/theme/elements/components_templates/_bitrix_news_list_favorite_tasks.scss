@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+//
+// Блок списка типовых работ
+//
+ul.favorite_tasks {
+  list-style: none;
+  padding: 0;
+  margin: gutter();
+  display: block;
+  overflow: hidden;
+
+  li {
+    display: block;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: $margin-small;
+    padding-bottom: $margin-small;
+    overflow: hidden;
+    width: 100%;
+    border-bottom-color: $color_lib_02;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+
+    .name_cell {
+      @include span(first 10);
+      @media screen and (max-width: $screen-md) {
+        @include span(first 9);
+      }
+      @media screen and (max-width: $screen-sm) {
+        @include span(first 8);
+      }
+      @media screen and (max-width: $screen-xsm) {
+        @include full();
+      }
+    }
+    .time_cell {
+      @include span(last 2);
+      @media screen and (max-width: $screen-md) {
+        @include span(last 3);
+      }
+      @media screen and (max-width: $screen-sm) {
+        @include span(last 4);
+      }
+      @media screen and (max-width: $screen-xsm) {
+        @include full();
+      }
+    }
+
+    &.task_row_header {
+      border-top-color: $color_lib_02;
+      border-top-width: 2px;
+      border-top-style: solid;
+      font-size: 1.625em;
+      .header_name {
+        span {
+          display: inline-block;
+          margin-left: 90px;
+          @media screen and (max-width: $screen-xsm) {
+            margin-left: 0;
+          }
+          &:before {
+            @include fa-block;
+            content: "\f103";
+            margin-right: $margin-small / 2;
+          }
+        }
+      }
+      .header_time {
+        @media screen and (max-width: $screen-xsm) {
+          display: none;
+        }
+        span {
+          display: inline-block;
+          &:after {
+            @include fa-block;
+            margin-left: $margin-small / 2;
+            color: $color_lib_08;
+            content: "\f005";
+          }
+        }
+      }
+    }
+
+    &:nth-child(odd) {
+      background-color: $color_lib_03;
+    }
+
+    .task_descr {
+      .task_icon {
+        float: left;
+        margin-top: $margin-small;
+        @media screen and (max-width: $screen-xsm) {
+          float: none;
+          margin: 0 auto;
+        }
+      }
+
+      h3, p {
+        margin-left: 90px;
+      }
+
+      h3 {
+        margin-top: 0;
+        font-size: 1.75em;
+        text-transform: uppercase;
+        @media screen and (max-width: $screen-sm) {
+          margin-top: $margin-small;
+        }
+        @media screen and (max-width: $screen-xsm) {
+          margin-left: 0;
+          font-size: 1.25em;
+        }
+      }
+
+      p {
+        font-size: 1.25em;
+        font-weight: 300;
+        margin-bottom: 0;
+        @media screen and (max-width: $screen-sm) {
+          display: none;
+        }
+      }
+    }
+
+    .task_time {
+      font-size: 1.25em;
+      font-weight: 600;
+      text-align: right;
+      @media screen and (max-width: $screen-sm) {
+        font-size: 1.75em;
+        font-weight: 400;
+        margin-top: $margin-small;
+      }
+    }
+  }
+
+} // ul.favorite_tasks
+
+
+p.favorite_tasks_note {
+  @include full();
+  margin-top: 0;
+  &:before {
+    @include fa-block;
+    margin-right: $margin-small / 2;
+    color: $color_lib_08;
+    content: "\f005";
+  }
+}

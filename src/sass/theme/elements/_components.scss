@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.sidebar_block {
+  display: block;
+  overflow: hidden;
+  margin-bottom: $margin-base;
+}
+
 //
 // Дополнительные шаблоны компонентов
 //
@@ -7,3 +13,7 @@
 @import "components_templates/bitrix_breadcrumb_msav_breadcrumb";
 @import "components_templates/bitrix_news_list_advantages";
 @import "components_templates/bitrix_news_list_services_list";
+@import "components_templates/bitrix_news_list_favorite_tasks";
+@import "components_templates/bitrix_news_list_services_menu";
+
+@import "components_templates/msav_contact_item_all_contacts";

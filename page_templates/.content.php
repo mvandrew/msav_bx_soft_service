@@ -14,8 +14,13 @@ $TEMPLATE["two_columns.php"]        = Array(
     "sort"                          => 2
 );
 
+$TEMPLATE["no_sidebar.php"]         = Array(
+    "name"                          => GetMessage("PT_NO_SIDEBAR"),
+    "sort"                          => 3
+);
+
 $TEMPLATE["no_container.php"]        = Array(
     "name"                          => GetMessage("PT_NO_CONTAINER"),
-    "sort"                          => 3
+    "sort"                          => 4
 );
 ?>

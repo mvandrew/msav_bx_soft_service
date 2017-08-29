@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+//
+// Стиль страницы без сайдбара
+//
+main.no_sidebar {
+  @include full();
+}

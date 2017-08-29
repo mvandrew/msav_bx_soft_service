@@ -112,8 +112,11 @@ if (defined("_MSAV_TH_TWO_COLUMNS")) {
     // Для двухколоночного макета
     echo '<div class="container"><main class="two_columns_container">';
 } elseif (defined("_MSAV_TH_NO_CONTAINER")) {
-        // Для двухколоночного макета
-        echo '<main class="no_container">';
+    // Для макета без контейнера
+    echo '<div class="no_container">';
+} elseif (defined("_MSAV_TH_NO_SIDEBAR")) {
+    // Для макета без боковой панели
+    echo '<div class="container"><main class="no_sidebar">';
 } else {
     // По-умолчанию, с правым сайдбаром
     echo '<div class="container"><main class="right_sidebar_container">';

@@ -261,14 +261,14 @@ gulp.task('icons-sprite', function () {
             imageMagick: true
         }))
         .pipe(spritesmith({
-            imgName: 'icons.png',
-            cssName: '_icons.scss',
-            cssFormat: 'scss',
-            algorithm: 'binary-tree',
-            cssVarMap: function(sprite) {
-                sprite.name = 'ico-' + sprite.name
-            }
-        })
+                imgName: 'icons.png',
+                cssName: '_icons.scss',
+                cssFormat: 'scss',
+                algorithm: 'binary-tree',
+                cssVarMap: function(sprite) {
+                    sprite.name = 'ico-' + sprite.name
+                }
+            })
         );
 
     var imgStream = spriteData.img
@@ -287,6 +287,51 @@ gulp.task('icons-sprite', function () {
 
     return merge(imgStream, cssStream)
         .pipe( notify({ message: 'Icons 64px Sprite task complete', onLast: true }) );
+});
+
+gulp.task('icons-sprite-84', function () {
+
+    var spriteData = gulp.src('./../../../assets/src/resource/icons/*.png')
+        .pipe( plumber({ errorHandler: function(err) {
+            notify.onError({
+                title: "Gulp error in " + err.plugin,
+                message:  err.toString()
+            })(err);
+        }}) )
+        .pipe(imageResize({
+            width: 84,
+            height: 84,
+            crop: true,
+            upscale: true,
+            imageMagick: true
+        }))
+        .pipe(spritesmith({
+                imgName: 'icons-84.png',
+                cssName: '_icons-84.scss',
+                cssFormat: 'scss',
+                algorithm: 'binary-tree',
+                cssVarMap: function(sprite) {
+                    sprite.name = 'ico84-' + sprite.name
+                }
+            })
+        );
+
+    var imgStream = spriteData.img
+        .pipe( buffer() )
+        .pipe( cache(imagemin({
+                interlaced: true,
+                progressive: true,
+                svgoPlugins: [{removeViewBox: false}],
+                use: [imageminPngquant()]
+            }))
+        )
+        .pipe( gulp.dest('./../../../assets/img/') );
+
+    var cssStream = spriteData.css
+        .pipe( gulp.dest('./../../../assets/src/sass/') );
+
+    return merge(imgStream, cssStream)
+        .pipe( notify({ message: 'Icons 84px Sprite task complete', onLast: true }) );
 });
 
 gulp.task('clear', function (done) {

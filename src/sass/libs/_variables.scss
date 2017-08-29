@@ -47,6 +47,7 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
 $screen-min:              320px;
 $screen-xs:               480px;
 $screen-sm:               768px;
+$screen-xsm:              $screen-sm - ($screen-sm - $screen-xs) / 2;
 $screen-md:               992px;
 $screen-lg:               1200px;
 $screen-xl:               1365px;

@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+//
+// Блок меню услуг
+//
+.services_menu_block {
+
+  h3 {
+    display: block;
+    margin: 0;
+    padding: 15px;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: left;
+    background-color: #f2ede4;
+    border-top-color: $color_lib_05;
+    border-top-width: 4px;
+    border-top-style: solid;
+    border-bottom-color: $color_lib_03;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    li {
+      font-size: 1.2em;
+      a {
+        display: block;
+        color: $color_lib_01;
+        text-decoration: none;
+        margin: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top-color: $color_lib_03;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-bottom-color: $color_lib_03;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        background-color: $color-bg;
+        &:hover,
+        &:focus {
+          text-decoration: underline;
+          border-top-color: $color_lib_05;
+          border-bottom-color: $color_lib_05;
+          background-color: $color_lib_05;
+        }
+      }
+      &:nth-child(even) a {
+        background-color: $color_lib_04;
+        &:hover,
+        &:focus {
+          text-decoration: underline;
+          border-top-color: $color_lib_05;
+          border-bottom-color: $color_lib_05;
+          background-color: $color_lib_05;
+        }
+      }
+    }
+  }
+
+} // .services_menu_block

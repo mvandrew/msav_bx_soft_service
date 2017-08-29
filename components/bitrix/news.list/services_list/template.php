@@ -17,7 +17,7 @@ $this->setFrameMode(true);
         <li>
             <div class="services-list-container" style="border-color: <?="#".$arItem["PROPERTIES"]["BG_COLOR"]["VALUE"]?>;">
                 <h3 class="services-list-title" style="background-color: <?="#".$arItem["PROPERTIES"]["BG_COLOR"]["VALUE"]?>;"><a href="<?=$arItem["PROPERTIES"]["SERVICE_URL"]["VALUE"]?>"><?=$arItem["NAME"]?></a></h3>
-                <?
+                <?php
                 $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
                 $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
                 ?>

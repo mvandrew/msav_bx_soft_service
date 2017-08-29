@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+//
+// Контактный блок со всеми контактами
+//
+.msav_all_contacts {
+  display: block;
+  margin-top: $margin-base;
+  margin-bottom: $margin-base;
+  padding: 0;
+  border-left-color: $color_lib_05;
+  border-left-width: 5px;
+  border-left-style: solid;
+
+  h2 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    background-color: $color_lib_05;
+    font-size: 1em;
+    padding-left: $margin-base;
+    padding-right: $margin-base;
+    padding-top: $margin-small;
+    padding-bottom: $margin-small;
+    span {
+      font-size: 2em;
+      font-weight: 400;
+      text-transform: none;
+    }
+  }
+
+  .msav_all_contacts_body {
+    display: block;
+    overflow: hidden;
+    padding: $margin-base;
+  }
+
+  p {
+    font-size: 1.5em;
+    margin-top: 0.4em;
+    margin-bottom: 0;
+  }
+
+  p.phone {
+    font-size: 2em;
+    margin-top: 0;
+    em {
+      font-style: normal;
+      font-size: 0.5em;
+    }
+  }
+
+} // .msav_all_contacts
