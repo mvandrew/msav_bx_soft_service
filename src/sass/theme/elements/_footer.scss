@@ -2,3 +2,159 @@
 //
 // ЭЛЕМЕНТЫ ПОДВАЛА САЙТА
 //
+
+footer.main_footer {
+  display: block;
+  overflow: hidden;
+  margin-top: $margin-base;
+  color: $color-bg;
+
+  a {
+    color: $color-bg;
+    text-decoration: underline;
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+      color: $color_lib_07;
+    }
+  }
+
+  .footer_navi,
+  .footer_copy {
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer_navi {
+    background-color: #4f4d47;
+    padding-top: 1.1em;
+    padding-bottom: 2.2em;
+    border-top-color: #3f3e3a;
+    border-top-style: solid;
+    border-top-width: 5px;
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      .navi_block {
+        @include span(3);
+        margin-top: 1.1em;
+        @media screen and (max-width: $screen-md) {
+          @include span(6);
+        }
+        @media screen and (max-width: $screen-xsm) {
+          @include full();
+        }
+
+        p {
+          margin: 0;
+          padding: 0;
+        }
+
+        p.footer_contact_item {
+          margin-bottom: 0.5em;
+          &:first-child {
+            font-size: 1.5em;
+            text-transform: uppercase;
+            margin-bottom: 0;
+          }
+        }
+
+        p.small {
+          font-size: 0.7em;
+          margin-bottom: 1.2em;
+        }
+
+        .footer_menu {
+          display: block;
+          overflow: hidden;
+
+          h3 {
+            margin-top: 0;
+            padding-top: 0;
+            font-size: 1.5em;
+            font-weight: 400;
+            text-transform: uppercase;
+          }
+
+          ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            li {
+              display: block;
+              margin-top: 0.4em;
+              margin-bottom: 0.4em;
+              &:before {
+                @include fa-block;
+                content: "\f0da";
+                margin-left: $margin-small;
+                margin-right: $margin-small / 2;
+              }
+
+              a {
+                text-decoration: none;
+                &:hover,
+                &:focus {
+                  text-decoration: underline;
+                }
+              }
+            }
+          }
+        } // .footer_menu
+
+      } // .navi_block
+    }
+
+  } // .footer_navi
+
+  .footer_copy {
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding-top: 2.2em;
+    padding-bottom: 2.2em;
+    background-color: #3f3e3a;
+
+    .right_navi {
+      display: block;
+      @include full();
+
+      ul.menu-list {
+        display: block;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        font-size: 0.75em;
+
+        li {
+          display: block;
+          float: left;
+          padding: 0;
+          margin-bottom: 1.1em;
+          margin-right: 1.1em;
+        }
+      }
+    } // .right_navi
+
+    .footer_info {
+      .data_area {
+        display: block;
+        @include span(6);
+        &:last-child {
+          text-align: right;
+        }
+        @media screen and (max-width: $screen-sm) {
+          @include full();
+        }
+        font-size: 0.75em;
+      }
+    } // .footer_info
+
+  } // .footer_copy
+
+} // footer.main_footer
