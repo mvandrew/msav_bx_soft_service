@@ -2,7 +2,6 @@
 <head>
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
-	<meta name="yandex-verification" content="58b41ef854fc984a">
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
 	<title><?php $APPLICATION->ShowTitle(false); ?></title><?php $APPLICATION->ShowHead();
 \Bitrix\Main\Page\Asset::getInstance()->addCss( SITE_TEMPLATE_PATH . '/css/vendor-css.min.css' );
