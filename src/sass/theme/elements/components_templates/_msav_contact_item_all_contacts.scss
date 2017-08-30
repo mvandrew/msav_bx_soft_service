@@ -27,18 +27,30 @@
       font-weight: 400;
       text-transform: none;
     }
+    @media screen and (max-width: $screen-xs) {
+      padding: $margin-small;
+      span {
+        font-size: 1.5em;
+      }
+    }
   }
 
   .msav_all_contacts_body {
     display: block;
     overflow: hidden;
     padding: $margin-base;
+    @media screen and (max-width: $screen-xs) {
+      padding: $margin-small;
+    }
   }
 
   p {
     font-size: 1.5em;
     margin-top: 0.4em;
     margin-bottom: 0;
+    @media screen and (max-width: $screen-xs) {
+      font-size: 1.2em;
+    }
   }
 
   p.phone {
@@ -47,6 +59,12 @@
     em {
       font-style: normal;
       font-size: 0.5em;
+    }
+    @media screen and (max-width: $screen-xs) {
+      font-size: 1.8em;
+      em {
+        display: block;
+      }
     }
   }
 

@@ -118,5 +118,8 @@ header#title_area {
     margin-bottom: 0;
     padding-top: 0.4em;
     padding-bottom: 0.4em;
+    @media screen and (max-width: $screen-xs) {
+      font-size: 1.8em;
+    }
   }
 }

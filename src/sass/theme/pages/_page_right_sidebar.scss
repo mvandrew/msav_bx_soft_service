@@ -14,11 +14,23 @@ aside.right_sidebar {
 
 main.right_sidebar_container {
   @include span(first 9);
+  @media screen and (max-width: $screen-lg) {
+    @include span(first 8);
+  }
+  @media screen and (max-width: $screen-sm) {
+    @include full();
+  }
 } // main.right_sidebar_container
 
 
 aside.right_sidebar {
   @include span(last 3);
+  @media screen and (max-width: $screen-lg) {
+    @include span(last 4);
+  }
+  @media screen and (max-width: $screen-sm) {
+    @include full();
+  }
   margin-top: $margin-base * 2;
   margin-bottom: $margin-base;
   padding-top: 0;

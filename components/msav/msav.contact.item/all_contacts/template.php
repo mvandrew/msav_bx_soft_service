@@ -41,7 +41,7 @@ echo '<div class="clearfix"></div><div class="msav_all_contacts">';
 printf('<h2><span>%s</span></h2>', GetMessage('CT_MCI_ALL_CONTACTS_TITLE') );
 echo '<div class="msav_all_contacts_body">';
 foreach ($contactValues as $itemClass => $curValue) {
-    printf('<p class="%2$s"><i class="fa fa-%1$s" aria-hidden="true"></i>&nbsp;<span class="contact_%2$s">%3$s%4$s</span></p>',
+    printf('<p class="%2$s"><i class="fa fa-%1$s" aria-hidden="true"></i>&nbsp;<span class="contact_%2$s">%3$s</span>%4$s</p>',
         $curValue['icon'],
         $itemClass,
         $curValue['value'],
