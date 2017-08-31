@@ -207,7 +207,7 @@ blockquote *:last-child {
   font-size: 1.5em;
   margin-bottom: 0.2em;
   margin-left: 1.8em;
-  color: #98978b;
+  color: #74726b;
 }
 
 .focus-block ul li:before {
@@ -221,6 +221,7 @@ table.table {
   border-top-width: 5px;
   border-top-style: solid;
   border-spacing: 0;
+  margin-bottom: 1.8em;
 }
 
 table.table tr th,

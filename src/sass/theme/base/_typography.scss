@@ -186,7 +186,7 @@ blockquote {
       font-size: 1.5em;
       margin-bottom: 0.2em;
       margin-left: $margin-base;
-      color: $color_lib_02;
+      color: lighten($color_lib_01, 20%);
       &:before {
         content: "\2014";
         margin-right: $margin-small;
@@ -210,6 +210,7 @@ table.table {
   border-top-width: 5px;
   border-top-style: solid;
   border-spacing: 0;
+  margin-bottom: $margin-base;
   tr {
     th, td {
       text-align: left;
