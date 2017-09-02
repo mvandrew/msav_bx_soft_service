@@ -1240,6 +1240,23 @@ p.favorite_tasks_note:before {
   font-size: 0.5em;
 }
 
+a#to_top_button {
+  display: none;
+  position: fixed;
+  width: 64px;
+  height: 64px;
+  right: 2%;
+  bottom: 5%;
+  background-repeat: no-repeat;
+  background-image: url("./img/to-top.png");
+  background-position: center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  cursor: pointer;
+  opacity: 0.6;
+  z-index: 999;
+}
+
 .column_two {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;

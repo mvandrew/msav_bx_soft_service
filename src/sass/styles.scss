@@ -22,6 +22,7 @@ $output-bourbon-deprecation-warnings: false;
 @import "theme/elements/header";
 @import "theme/elements/footer";
 @import "theme/elements/components";
+@import "theme/elements/to_top_button";
 
 // Page Styles: Стили шаблонов страниц
 @import "theme/pages/page";

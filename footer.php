@@ -130,4 +130,4 @@ if (defined("_MSAV_TH_TWO_COLUMNS")) {
 			</div>
 		</div>
 	</div>
-</footer><?php echo '</body></html>'; ?>
+</footer><a id="to_top_button" href="#top"></a><?php echo '</body></html>'; ?>
