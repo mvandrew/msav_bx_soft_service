@@ -14,7 +14,6 @@ var gulp                = require("gulp"),
     browserSync         = require('browser-sync'),
     reload              = browserSync.reload,
     notify              = require('gulp-notify'),
-    gutil               = require('gulp-util'),
     remoteSrc           = require('gulp-remote-src'),
     imagemin            = require('gulp-imagemin'),
     imageminPngquant    = require('imagemin-pngquant'),
@@ -120,7 +119,6 @@ gulp.task('sass', function () {
             })(err);
         }}) )
         .pipe( sass() )
-        //.on( 'error', gutil.log )
         .pipe( autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }) )
         .pipe( gcmq() )
         .pipe( gulp.dest('./') )

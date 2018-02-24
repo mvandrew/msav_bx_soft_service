@@ -363,6 +363,10 @@ table.table tr:nth-child(even) td {
   color: #dfd7ca;
 }
 
+.form .field_row .field_area .field_container input[type="text"]::-ms-input-placeholder {
+  color: #dfd7ca;
+}
+
 .form .field_row .field_area .field_container input[type="text"]::placeholder {
   color: #dfd7ca;
 }

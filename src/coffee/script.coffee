@@ -42,7 +42,7 @@
     phoneContactModify()
     servicesListMatchHeight()
 
-  $(window).on "scroll", (event) => # Обработка отображения кнопки наверх
+  $(window).on "scroll", (event) -> # Обработка отображения кнопки наверх
     if $(@).scrollTop() > 150
       $("#to_top_button").fadeIn "600"
     else

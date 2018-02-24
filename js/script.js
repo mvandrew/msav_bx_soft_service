@@ -1,6 +1,6 @@
 (function($) {
   var anchorAnimate, phoneContactModify, servicesListMatchHeight, topMenuPrepare;
-  anchorAnimate = function() {
+  anchorAnimate = function() { // Анимация перехода по якорям
     return $("a[href*='#']").on("click", function(event) {
       var hrefValue, pattern;
       pattern = /#.*$/g;
@@ -11,7 +11,7 @@
       return event.preventDefault();
     });
   };
-  topMenuPrepare = function() {
+  topMenuPrepare = function() { // Подготовка к работе главного меню сайта
     return $(".toggle_button").on("click", function(event) {
       var topMenu;
       $(this).toggleClass("active");
@@ -23,12 +23,13 @@
       }
     });
   };
-  phoneContactModify = function() {
+  phoneContactModify = function() { // Реализация кликабельной ссылки на телефоне для смартфонов
     if (device.mobile()) {
       return $(".contact_phone").each(function() {
         var phoneLink, phoneNum;
-        phoneNum = $(this).text();
+        phoneNum = $(this).text(); // Текущее значение номера телефона
         $(this).text("");
+        // Создание ссылки для звонка со смартфона
         phoneLink = document.createElement("a");
         phoneLink.setAttribute("href", "tel:" + phoneNum);
         this.appendChild(phoneLink);
@@ -36,7 +37,7 @@
       });
     }
   };
-  servicesListMatchHeight = function() {
+  servicesListMatchHeight = function() { // Контроль высоты блоков списка услуг
     $(".services-list-title").matchHeight();
     return $(".services-list-descr").matchHeight();
   };
@@ -46,13 +47,11 @@
     phoneContactModify();
     return servicesListMatchHeight();
   });
-  return $(window).on("scroll", (function(_this) {
-    return function(event) {
-      if ($(_this).scrollTop() > 150) {
-        return $("#to_top_button").fadeIn("600");
-      } else {
-        return $("#to_top_button").fadeOut("600");
-      }
-    };
-  })(this));
+  return $(window).on("scroll", function(event) { // Обработка отображения кнопки наверх
+    if ($(this).scrollTop() > 150) {
+      return $("#to_top_button").fadeIn("600");
+    } else {
+      return $("#to_top_button").fadeOut("600");
+    }
+  });
 })(jQuery);
