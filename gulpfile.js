@@ -24,6 +24,71 @@ var gulp                = require("gulp"),
     imageResize         = require('gulp-image-resize'),
     gcmq                = require('gulp-group-css-media-queries');
 
+
+/**
+ * Определение структуры каталогов проекта
+ *
+ * @type {{src: string, dist: string, build: string, assets: string}}
+ */
+var dirs = {
+    src: './src/',
+    dist: './',
+    build: './build/',
+    assets: './../../../assets/'
+};
+
+/**
+ * Определение структуры каталогов проекта специфичных для конкретного сайта
+ *
+ * @type {{src: string, dist: string}}
+ */
+var dirs_assets = {
+    src: dirs.assets + 'src/',
+    dist: dirs.assets
+};
+
+
+/**
+ * Список файлов для сборки решения в production
+ *
+ * @type {string[]}
+ */
+var build_files = [
+    '**',
+    '!build',
+    '!build/**',
+    '!node_modules',
+    '!node_modules/**',
+    '!bower_components',
+    '!bower_components/**',
+    '!dist',
+    '!dist/**',
+    '!sass',
+    '!sass/**',
+    '!.git',
+    '!.git/**',
+    '!package.json',
+    '!package-lock.json',
+    '!bower.json',
+    '!**/*.arj',
+    '!**/*.rar',
+    '!**/*.zip',
+    '!.gitignore',
+    '!gulpfile.js',
+    '!.editorconfig',
+    '!.jshintrc',
+    '!src',
+    '!src/**',
+    '!**/*.log'
+];
+
+
+/**
+ * Рабочие файлы для контроля вносимых изменений.
+ * В первую очередь нужны для нормальной работы Browser-Sync.
+ *
+ * @type {string[]}
+ */
 var workFiles           = [
     './**/*.php',
     './../../../**/*.php',
@@ -40,6 +105,10 @@ var workFiles           = [
     '!./../../../upload/**/*'
 ];
 
+
+/**
+ * Запуск Browser-Sync
+ */
 gulp.task('browser-sync', function () {
     browserSync.init(workFiles, {
         proxy: {
@@ -49,34 +118,31 @@ gulp.task('browser-sync', function () {
     });
 });
 
+
+/**
+ * Копируем файлы шрифтов
+ */
 gulp.task('fonts', function () {
-    return gulp.src( './src/vendor/font-awesome/fonts/**/*.+(otf|eot|svg|ttf|woff|woff2)' )
+    return gulp.src( dirs.src + 'vendor/font-awesome/fonts/**/*.+(otf|eot|svg|ttf|woff|woff2)' )
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
                 message:  err.toString()
             })(err);
         }}) )
-        .pipe( gulp.dest('./fonts/') )
+        .pipe( gulp.dest( dirs.dist + 'fonts/' ) )
         .pipe( reload({stream:true}) )
         .pipe( notify({ message: 'Fonts task complete', onLast: true }) );
 });
 
-gulp.task('google-fonts', function () {
-    return remoteSrc(
-        'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=cyrillic,cyrillic-ext,latin-ext',
-        {
-            base: null
-        }
-    )
-        .pipe( concat('google-fonts.css') )
-        .pipe( gulp.dest('./css/') );
-});
 
+/**
+ * Сборка общего CSS из стилей библиотек поставщиков
+ */
 gulp.task('vendor-css', function () {
     return gulp.src( [
-        './src/vendor/font-awesome/css/font-awesome.css',
-        './src/vendor/normalize-css/normalize.css'
+        dirs.src + 'vendor/font-awesome/css/font-awesome.css',
+        dirs.src + 'vendor/normalize-css/normalize.css'
     ] )
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
@@ -87,15 +153,19 @@ gulp.task('vendor-css', function () {
         .pipe( stripCssComments({preserve: false}) )
         .pipe( cssnano() )
         .pipe( concat('vendor-css.min.css') )
-        .pipe( gulp.dest('./css/') )
+        .pipe( gulp.dest(dirs.dist + 'css/') )
         .pipe( notify({ message: 'Vendor styles task complete', onLast: true }) );
 });
 
+
+/**
+ * Сборка общего JS из скриптов библиотек поставщиков
+ */
 gulp.task('vendor-js', function () {
     return gulp.src([
-        './src/vendor/jquery/dist/jquery.min.js',
-        './src/vendor/device.js/lib/device.min.js',
-        './src/vendor/matchHeight/dist/jquery.matchHeight-min.js'
+        dirs.src + 'vendor/jquery/dist/jquery.min.js',
+        dirs.src + 'vendor/device.js/lib/device.min.js',
+        dirs.src + 'vendor/matchHeight/dist/jquery.matchHeight-min.js'
     ])
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
@@ -106,12 +176,16 @@ gulp.task('vendor-js', function () {
         .pipe( stripComments() )
         .pipe( concat('vendor-js.min.js') )
         .pipe( uglify() )
-        .pipe( gulp.dest('./js/') )
+        .pipe( gulp.dest( dirs.dist + 'js/' ) )
         .pipe( notify({ message: 'Vendor Javascripts task complete', onLast: true }) );
 });
 
+
+/**
+ * Компиляция собственных стилей из SCSS проекта
+ */
 gulp.task('sass', function () {
-    return gulp.src( './src/sass/**/*.scss' )
+    return gulp.src( dirs.src + 'sass/**/*.scss' )
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
@@ -121,16 +195,20 @@ gulp.task('sass', function () {
         .pipe( sass() )
         .pipe( autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }) )
         .pipe( gcmq() )
-        .pipe( gulp.dest('./') )
+        .pipe( gulp.dest( dirs.dist ) )
         .pipe( cssnano() )
         .pipe( rename({suffix: '.min'}) )
-        .pipe( gulp.dest('./') )
+        .pipe( gulp.dest( dirs.dist ) )
         .pipe( reload({stream:true}) )
         .pipe( notify({ message: 'Styles task complete', onLast: true }) );
 });
 
+
+/**
+ * Компиляция стилей специфичных для конкретного сайта
+ */
 gulp.task('assets-sass', function () {
-    return gulp.src( './../../../assets/src/sass/**/*.scss' )
+    return gulp.src( dirs_assets.src + 'sass/**/*.scss' )
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
@@ -140,16 +218,20 @@ gulp.task('assets-sass', function () {
         .pipe( sass() )
         .pipe( autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }) )
         .pipe( gcmq() )
-        .pipe( gulp.dest('./../../../assets/css/') )
+        .pipe( gulp.dest( dirs_assets.dist + 'css/' ) )
         .pipe( cssnano() )
         .pipe( rename({suffix: '.min'}) )
-        .pipe( gulp.dest('./../../../assets/css/') )
+        .pipe( gulp.dest( dirs_assets.dist + 'css/' ) )
         .pipe( reload({stream:true}) )
         .pipe( notify({ message: 'Assets Styles task complete', onLast: true }) );
 });
 
+
+/**
+ * Компиляция JS файлов из Coffee script
+ */
 gulp.task('coffee', function() {
-    gulp.src( './src/coffee/**/*.coffee' )
+    gulp.src( dirs.src + 'coffee/**/*.coffee' )
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
@@ -157,16 +239,20 @@ gulp.task('coffee', function() {
             })(err);
         }}) )
         .pipe( coffee({bare: true}) )
-        .pipe( gulp.dest('./js/') )
+        .pipe( gulp.dest( dirs.dist + 'js/' ) )
         .pipe( uglify() )
         .pipe( rename({suffix: '.min'}) )
-        .pipe( gulp.dest('./js/') )
+        .pipe( gulp.dest( dirs.dist + 'js/' ) )
         .pipe( reload({stream:true}) )
         .pipe( notify({ message: 'Javascript task complete', onLast: true }) );
 });
 
+
+/**
+ * Компиляция JS файлов из Coffee script специфичных для конкретного сайта
+ */
 gulp.task('assets-coffee', function() {
-    gulp.src( './../../../assets/src/coffee/**/*.coffee' )
+    gulp.src( dirs_assets.src + 'coffee/**/*.coffee' )
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
@@ -174,16 +260,20 @@ gulp.task('assets-coffee', function() {
             })(err);
         }}) )
         .pipe( coffee({bare: true}) )
-        .pipe( gulp.dest('./../../../assets/js/') )
+        .pipe( gulp.dest( dirs_assets.dist + 'js/' ) )
         .pipe( uglify() )
         .pipe( rename({suffix: '.min'}) )
-        .pipe( gulp.dest('./../../../assets/js/') )
+        .pipe( gulp.dest( dirs_assets.dist + 'js/' ) )
         .pipe( reload({stream:true}) )
-        .pipe( notify({ message: 'Javascript task complete', onLast: true }) );
+        .pipe( notify({ message: 'Assets JavaScript task complete', onLast: true }) );
 });
 
+
+/**
+ * Компиляция шаблонов из PUG файлов
+ */
 gulp.task('pug', function buildHTML() {
-    return gulp.src( ['./src/pug/**/*.pug', '!./src/pug/libs/**/*.pug'] )
+    return gulp.src( [ dirs.src + 'pug/**/*.pug', '!' + dirs.src + 'pug/libs/**/*.pug'] )
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
@@ -199,13 +289,17 @@ gulp.task('pug', function buildHTML() {
         .pipe(rename(function (path) {
             path.extname = '.php'
         }))
-        .pipe(gulp.dest('./'))
+        .pipe( gulp.dest( dirs.dist ) )
         .pipe( reload({stream:true}) )
         .pipe( notify({ message: 'Pug(Jade) task complete', onLast: true }) );
 });
 
+
+/**
+ * Сжатие и оптимизация изображений темы оформления
+ */
 gulp.task('img', function() {
-    return gulp.src('./src/img/**/*')
+    return gulp.src( dirs.src + 'img/**/*' )
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
@@ -219,12 +313,16 @@ gulp.task('img', function() {
                 use: [imageminPngquant()]
             }))
         )
-        .pipe( gulp.dest('./img/') )
+        .pipe( gulp.dest( dirs.dist + 'img/' ) )
         .pipe( notify({ message: 'Theme Images task complete', onLast: true }) );
 });
 
+
+/**
+ * Сжатие и оптимизация изображений темы оформления специфичных для конкретного сайта
+ */
 gulp.task('assets-img', function() {
-    return gulp.src('./../../../assets/src/img/**/*')
+    return gulp.src( dirs_assets.src + 'img/**/*')
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
@@ -238,13 +336,17 @@ gulp.task('assets-img', function() {
                 use: [imageminPngquant()]
             }))
         )
-        .pipe( gulp.dest('./../../../assets/img/') )
+        .pipe( gulp.dest( dirs_assets.dist + 'img/' ) )
         .pipe( notify({ message: 'Assets Images task complete', onLast: true }) );
 });
 
+
+/**
+ * Сборка спрайтов иконок специфичных для конкретного сайта (размер 64px)
+ */
 gulp.task('icons-sprite', function () {
 
-    var spriteData = gulp.src('./../../../assets/src/resource/icons/*.png')
+    var spriteData = gulp.src( dirs_assets.src + 'resource/icons/*.png')
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
@@ -278,18 +380,22 @@ gulp.task('icons-sprite', function () {
                 use: [imageminPngquant()]
             }))
         )
-        .pipe( gulp.dest('./../../../assets/img/') );
+        .pipe( gulp.dest( dirs_assets.dist + 'img/') );
 
     var cssStream = spriteData.css
-        .pipe( gulp.dest('./../../../assets/src/sass/') );
+        .pipe( gulp.dest( dirs_assets.src + 'sass/') );
 
     return merge(imgStream, cssStream)
-        .pipe( notify({ message: 'Icons 64px Sprite task complete', onLast: true }) );
+        .pipe( notify({ message: 'Assets Icons 64px Sprite task complete', onLast: true }) );
 });
 
+
+/**
+ * Сборка спрайтов иконок специфичных для конкретного сайта (размер 84px)
+ */
 gulp.task('icons-sprite-84', function () {
 
-    var spriteData = gulp.src('./../../../assets/src/resource/icons/*.png')
+    var spriteData = gulp.src( dirs_assets.src + 'resource/icons/*.png')
         .pipe( plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
@@ -323,28 +429,36 @@ gulp.task('icons-sprite-84', function () {
                 use: [imageminPngquant()]
             }))
         )
-        .pipe( gulp.dest('./../../../assets/img/') );
+        .pipe( gulp.dest( dirs_assets.dist + 'img/') );
 
     var cssStream = spriteData.css
-        .pipe( gulp.dest('./../../../assets/src/sass/') );
+        .pipe( gulp.dest( dirs_assets.src + 'sass/') );
 
     return merge(imgStream, cssStream)
-        .pipe( notify({ message: 'Icons 84px Sprite task complete', onLast: true }) );
+        .pipe( notify({ message: 'Assets Icons 84px Sprite task complete', onLast: true }) );
 });
 
+
+/**
+ * Очистка кэш для Gulp
+ */
 gulp.task('clear', function (done) {
     return cache.clearAll(done);
 });
 
+
+/**
+ * Задача по-умолчанию
+ */
 gulp.task('watch', [ 'fonts', 'vendor-css', 'vendor-js', 'sass', 'pug', 'coffee', 'img',
         'assets-sass', 'assets-coffee', 'assets-img', 'browser-sync' ], function () {
 
-    gulp.watch('./src/sass/**/*.scss', ['sass']);
-    gulp.watch('./src/pug/**/*.pug', ['pug']);
-    gulp.watch('./src/coffee/**/*.coffee', ['coffee']);
+    gulp.watch( dirs.src + 'sass/**/*.scss', ['sass'] );
+    gulp.watch( dirs.src + 'pug/**/*.pug', ['pug'] );
+    gulp.watch( dirs.src + 'coffee/**/*.coffee', ['coffee'] );
 
-    gulp.watch('./../../../assets/src/sass/**/*.scss', ['assets-sass']);
-    gulp.watch('./../../../assets/src/coffee/**/*.coffee', ['assets-coffee']);
+    gulp.watch( dirs_assets.src + 'sass/**/*.scss', ['assets-sass'] );
+    gulp.watch( dirs_assets.src + 'coffee/**/*.coffee', ['assets-coffee'] );
 });
 
 gulp.task("default", ["watch"]);
