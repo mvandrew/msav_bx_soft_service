@@ -1376,7 +1376,7 @@ ul.in-content-menu > li:last-child {
 
 .page-navi > p {
   margin-top: 0;
-  margin-bottom: 0.8em;
+  margin-bottom: 0;
 }
 
 .page-navi ul.page-navi-items {
@@ -1396,6 +1396,8 @@ ul.in-content-menu > li:last-child {
   float: left;
   margin-left: .4em;
   margin-right: .4em;
+  margin-top: 0.8em;
+  margin-bottom: 0;
 }
 
 .page-navi ul.page-navi-items > li > span {

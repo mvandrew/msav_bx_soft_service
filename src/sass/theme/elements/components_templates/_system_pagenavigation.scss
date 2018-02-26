@@ -26,7 +26,7 @@
 
   > p {
     margin-top: 0;
-    margin-bottom: $margin-small;
+    margin-bottom: 0;
   }
 
   ul.page-navi-items {
@@ -37,6 +37,8 @@
       float: left;
       margin-left: .4em;
       margin-right: .4em;
+      margin-top: $margin-small;
+      margin-bottom: 0;
 
       > span {
         @include page-navi-button;
