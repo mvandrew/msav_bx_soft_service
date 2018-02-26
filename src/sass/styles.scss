@@ -10,21 +10,25 @@ $output-bourbon-deprecation-warnings: false;
 @import "theme/base/colors";
 
 // Libs: Библиотеки
+//
 @import "libs/variables";
 @import "libs/mixins";
 
 // Theme Core: Ядро темы
+//
 @import "theme/base/typography";
 @import "theme/base/layout";
 @import "theme/base/controls";
 
 // Base Page Elements: Стандартные элементы страницы
+//
 @import "theme/elements/header";
 @import "theme/elements/footer";
 @import "theme/elements/components";
 @import "theme/elements/to_top_button";
 
 // Page Styles: Стили шаблонов страниц
+//
 @import "theme/pages/page";
 @import "theme/pages/page_two_columns";
 @import "theme/pages/page_right_sidebar";

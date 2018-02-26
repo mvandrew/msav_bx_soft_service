@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+//
+// Оформление списка меню в контенте (тексте документа)
+//
+ul.in-content-menu {
+  @include no_list;
+  background-color: #f2ede4;
+  border-top-color: $color_lib_05;
+  border-top-width: 4px;
+  border-top-style: solid;
+  border-bottom-color: $color_lib_03;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-right-color: $color_lib_03;
+  border-right-width: 2px;
+  border-right-style: solid;
+  border-left-color: $color_lib_03;
+  border-left-width: 2px;
+  border-left-style: solid;
+  margin-top: $margin-base;
+  margin-bottom: $margin-base;
+  padding: $margin-base;
+
+  > li {
+    @include simple_block;
+    margin-top: $margin-small;
+    margin-bottom: $margin-small;
+    a {
+      @include simple_block;
+      font-size: 1.2em;
+      padding: $margin-small;
+      background-color: $color-bg;
+      border-color: $color_lib_03;
+      border-width: 1px;
+      border-style: solid;
+      color: $color_lib_01;
+      text-decoration: none;
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+        background-color: $color_lib_05;
+        border-color: $color_lib_05;
+      }
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  } // > li
+
+} // ul.in-content-menu

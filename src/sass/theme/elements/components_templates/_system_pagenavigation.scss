@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+//
+// Оформление пагинации по-умолчанию
+//
+
+// Стиль кнопки перехода в пагинации
+//
+@mixin page-navi-button {
+  @include simple_block;
+  background-color: $color-bg;
+  border-color: $color_lib_03;
+  border-width: 2px;
+  border-style: solid;
+  padding-left: .6em;
+  padding-right: .6em;
+  padding-top: .15em;
+  margin-bottom: .15em;
+  color: $color_lib_01;
+}
+
+.page-navi {
+  @include simple_block;
+  margin-top: $margin-base;
+  margin-bottom: $margin-base;
+
+  > p {
+    margin-top: 0;
+    margin-bottom: $margin-small;
+  }
+
+  ul.page-navi-items {
+    @include no_list;
+
+    > li {
+      display: block;
+      float: left;
+      margin-left: .4em;
+      margin-right: .4em;
+
+      > span {
+        @include page-navi-button;
+      }
+
+      > a {
+        @include page-navi-button;
+        background-color: #f2ede4;
+        &:hover,
+        &:focus {
+          border-color: $color_lib_05;
+          background-color: $color_lib_05;
+        }
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  } // ul.page-navi-items
+} // .page-navi

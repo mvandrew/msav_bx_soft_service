@@ -1244,6 +1244,209 @@ p.favorite_tasks_note:before {
   font-size: 0.5em;
 }
 
+.articles-list {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: none;
+  border-width: 0;
+  border-style: none;
+}
+
+.articles-list > .articles-item {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: none;
+  border-width: 0;
+  border-style: none;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+  border-bottom-color: #dfd7ca;
+  border-bottom-width: 4px;
+  border-bottom-style: solid;
+}
+
+.articles-list > .articles-item h2 {
+  font-size: 1.4em;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.articles-list > .articles-item p {
+  margin-left: 1.8em;
+}
+
+.articles-list > .articles-item p.more_link {
+  text-align: right;
+}
+
+.articles-list > .articles-item:last-child {
+  border-bottom-color: transparent;
+  border-bottom-width: 0;
+  border-bottom-style: none;
+}
+
+ul.in-content-menu {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: none;
+  border-width: 0;
+  border-style: none;
+  list-style-image: none;
+  list-style-type: none;
+  background-color: #f2ede4;
+  border-top-color: #f4c825;
+  border-top-width: 4px;
+  border-top-style: solid;
+  border-bottom-color: #dfd7ca;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-right-color: #dfd7ca;
+  border-right-width: 2px;
+  border-right-style: solid;
+  border-left-color: #dfd7ca;
+  border-left-width: 2px;
+  border-left-style: solid;
+  margin-top: 1.8em;
+  margin-bottom: 1.8em;
+  padding: 1.8em;
+}
+
+ul.in-content-menu > li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: none;
+  border-width: 0;
+  border-style: none;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+
+ul.in-content-menu > li a {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: none;
+  border-width: 0;
+  border-style: none;
+  font-size: 1.2em;
+  padding: 0.8em;
+  background-color: #ffffff;
+  border-color: #dfd7ca;
+  border-width: 1px;
+  border-style: solid;
+  color: #3f3e3a;
+  text-decoration: none;
+}
+
+ul.in-content-menu > li a:hover,
+ul.in-content-menu > li a:focus {
+  text-decoration: underline;
+  background-color: #f4c825;
+  border-color: #f4c825;
+}
+
+ul.in-content-menu > li:first-child {
+  margin-top: 0;
+}
+
+ul.in-content-menu > li:last-child {
+  margin-bottom: 0;
+}
+
+.page-navi {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: none;
+  border-width: 0;
+  border-style: none;
+  margin-top: 1.8em;
+  margin-bottom: 1.8em;
+}
+
+.page-navi > p {
+  margin-top: 0;
+  margin-bottom: 0.8em;
+}
+
+.page-navi ul.page-navi-items {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: none;
+  border-width: 0;
+  border-style: none;
+  list-style-image: none;
+  list-style-type: none;
+}
+
+.page-navi ul.page-navi-items > li {
+  display: block;
+  float: left;
+  margin-left: .4em;
+  margin-right: .4em;
+}
+
+.page-navi ul.page-navi-items > li > span {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: none;
+  border-width: 0;
+  border-style: none;
+  background-color: #ffffff;
+  border-color: #dfd7ca;
+  border-width: 2px;
+  border-style: solid;
+  padding-left: .6em;
+  padding-right: .6em;
+  padding-top: .15em;
+  margin-bottom: .15em;
+  color: #3f3e3a;
+}
+
+.page-navi ul.page-navi-items > li > a {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: none;
+  border-width: 0;
+  border-style: none;
+  background-color: #ffffff;
+  border-color: #dfd7ca;
+  border-width: 2px;
+  border-style: solid;
+  padding-left: .6em;
+  padding-right: .6em;
+  padding-top: .15em;
+  margin-bottom: .15em;
+  color: #3f3e3a;
+  background-color: #f2ede4;
+}
+
+.page-navi ul.page-navi-items > li > a:hover,
+.page-navi ul.page-navi-items > li > a:focus {
+  border-color: #f4c825;
+  background-color: #f4c825;
+}
+
+.page-navi ul.page-navi-items > li:first-child {
+  margin-left: 0;
+}
+
 a#to_top_button {
   display: none;
   position: fixed;

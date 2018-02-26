@@ -9,11 +9,33 @@
 //
 // Дополнительные шаблоны компонентов
 //
+
+// Верхнее меню сайта
 @import "components_templates/bitrix_menu_top_menu";
+
+// Крошки навигации
 @import "components_templates/bitrix_breadcrumb_msav_breadcrumb";
+
+// Список преимуществ
 @import "components_templates/bitrix_news_list_advantages";
+
+// Список услуг
 @import "components_templates/bitrix_news_list_services_list";
+
+// Список типовых работ
 @import "components_templates/bitrix_news_list_favorite_tasks";
+
+// Меню услуг
 @import "components_templates/bitrix_news_list_services_menu";
 
+// Шаблон контактов
 @import "components_templates/msav_contact_item_all_contacts";
+
+// Список статей
+@import "components_templates/bitrix_news_articles";
+
+// Оформление списка меню в контенте (тексте документа)
+@import "components_templates/bitrix_menu_in_content";
+
+// Оформление пагинации по-умолчанию
+@import "components_templates/system_pagenavigation";

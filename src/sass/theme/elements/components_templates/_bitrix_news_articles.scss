@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+//
+// Оформление списка статей
+//
+.articles-list {
+  @include simple_block;
+
+  > .articles-item {
+    @include simple_block;
+    margin-top: $margin-small;
+    margin-bottom: $margin-small;
+
+    border-bottom-color: $color_lib_03;
+    border-bottom-width: 4px;
+    border-bottom-style: solid;
+
+    h2 {
+      font-size: 1.4em;
+      font-weight: 400;
+      text-transform: none;
+    }
+
+    p {
+      margin-left: $margin-base;
+
+      &.more_link {
+        text-align: right;
+      }
+    }
+
+    &:last-child {
+      border-bottom-color: transparent;
+      border-bottom-width: 0;
+      border-bottom-style: none;
+    }
+  } // .articles-item
+} // .articles-list
